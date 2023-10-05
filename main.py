@@ -10,76 +10,52 @@
 """
 import fonctions as fct
 
-def main():
 
+def main():
     dictionnaire = fct.recuperer_dictionnaire()
 
     mot = fct.choisir_mot(dictionnaire)
-    liste_lettres = fct.diviser_mot(mot)
-    
+    mot_divise = list(mot)
+
     # creation d'une variable reponse utilisateur avec initialisation de la premiere lettre
-    espace_reponse = []
-    
-    for lettre in liste_lettres:
-        if lettre == liste_lettres[0]:
-            espace_reponse.append(lettre)
-        else:
-            espace_reponse.append("_")
+    liste_jeu = [mot_divise[0]]
+    liste_jeu.extend(["_"] * (len(mot_divise) - 1))
 
-    essais = set()
+    lettres_essayees = set()  # ensemble vide pour stocker les lettres déjà essayées
+
+    max_tentatives = 8
+    nb_tentatives = 0
     mot_trouve = False
-    nb = 0
 
-    while not mot_trouve and nb < 8:
-        print(fct.afficher_jeu(espace_reponse))
-        entree_lettre = input("Choisir une lettre : ").lower()
-        
-        if entree_lettre in essais:
-           print("Lettre déjà rentrée")
-           
-        elif not entree_lettre in espace_reponse:
-            essais.add(entree_lettre)
+    while not mot_trouve and nb_tentatives < max_tentatives:
 
-            lettre_dans_mot = False
-            
-            for i, lettre in enumerate(liste_lettres):
-                if entree_lettre == lettre:
-                    espace_reponse[i] = lettre.upper()
-                    lettre_dans_mot = True
-                    
-                    mot_trouve = "".join(espace_reponse).lower() == mot
+        # Afficher l'état actuel du jeu
+        print(f'\n{fct.afficher_jeu(liste_jeu)}')
 
-            if not lettre_dans_mot:
-                nb += 1
+        # Demander à l'utilisateur de choisir une lettre
+        lettre = input("Choisir une lettre : ").lower()
 
-    
+        mot_complet, message = fct.mot_complet(lettre, mot_divise, lettres_essayees, liste_jeu)
+
+        if mot_complet:
+            mot_trouve = True
+        else:
+            print(message)
+            nb_tentatives += 1
+
     if mot_trouve:
-        print(fct.afficher_jeu(espace_reponse))
-        print('Bravo')
+        print(f'\n{fct.afficher_jeu(liste_jeu)}')
+        print('Bravo, vous avez trouvé le mot !')
     else:
-        print("Trop d'essais, le mot était :", mot)
+        print('Dommage, vous avez perdu ! Le mot était :', mot)
 
-    b = input("Choisir 'r' pour recommencer ou 'a' pour arreter : ") 
+    b = input("\nChoisir 'r' pour recommencer ou 'a' pour arrêter : ")
 
     if b == 'r':
         return main()
-    else :
-        print("Au revoir !")     
-
-    
-                        
-           
-
-             
+    else:
+        print("Au revoir !")
 
 
-
-
-
-
-
-
-
-
-if __name__ == "__main__": 
+if __name__ == "__main__":
     main()
