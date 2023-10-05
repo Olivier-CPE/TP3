@@ -5,6 +5,9 @@
  * @email : maxime.barthomeuf@cpe.fr
  * @date : 05/10/2023, jeudi
  * TODO :
+ 
+ Fonctions du programme
+ """
 
 import random as rd
 
