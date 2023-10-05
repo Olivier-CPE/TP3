@@ -21,7 +21,6 @@ glace
 gomme
 hibou
 lapin
-lapin
 livre
 pomme
 ecole
@@ -29,7 +28,6 @@ ananas
 ballon
 banane
 basket
-bateau
 bateau
 bonbon
 cerise
@@ -56,19 +54,13 @@ cameleon
 chocolat
 papillon
 pingouin
-pingouin
 scorpion
-elephant
 elephant
 alligator
 aubergine
 chimpanze
 crocodile
-crocodile
 dinosaure
 kangourou
-kangourou
-kangourou
-pingouins
 grenouille
 hippopotame
